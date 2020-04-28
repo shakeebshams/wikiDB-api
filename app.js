@@ -104,6 +104,19 @@ app.delete('/articles', function(req, res) {
     });
 });
 
+app.delete('/articles/:title', function(req, res) {
+    Article.deleteOne(
+        {title: req.params.title},
+        function(err) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send("deleted article with title: " + req.params.title);
+            }
+        }
+    );
+});
+
 
 
 
