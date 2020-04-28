@@ -30,6 +30,18 @@ app.get('/articles', function(req, res) {
             res.send(found);
         }
     })
+}); 
+
+app.get('/articles/:title', function(req, res) {
+    Article.findOne({title: req.params.title}, function(err, article) {
+        if (err) {
+            res.send(err);
+        } else if (article) {
+            res.send(article);
+        } else {
+            console.log("bruh");
+        }
+    })
 });
 
 app.post('/articles', function(req, res) {
