@@ -61,6 +61,21 @@ app.put('/articles/:title', function(req, res) {
     )
 });
 
+app.patch('/articles/:title', function(req, res) {
+    Article.update(
+        {title: req.params.title},
+        {$set: req.body},
+        function(err) {
+            if (err) {
+                console.log("is it getting here")
+                res.send(err);
+            } else {
+                res.send("successfully updated through patch request");
+            }
+        }
+    )
+})
+
 app.post('/articles', function(req, res) {
     const title = req.body.title;
     const content = req.body.content;
@@ -94,5 +109,5 @@ app.delete('/articles', function(req, res) {
 
 port = 3000;
 app.listen(port, function() {
-    console.log('server has started on port' + port);
+    console.log('server has started on port ' + port);
 })
