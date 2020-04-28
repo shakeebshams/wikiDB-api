@@ -30,7 +30,7 @@ app.get('/articles', function(req, res) {
             res.send(found);
         }
     })
-}); 
+});
 
 app.get('/articles/:title', function(req, res) {
     Article.findOne({title: req.params.title}, function(err, article) {
@@ -42,6 +42,23 @@ app.get('/articles/:title', function(req, res) {
             console.log("bruh");
         }
     })
+});
+
+app.put('/articles/:title', function(req, res) {
+    Article.update(
+        {title: req.params.title},
+        {title: req.body.title, content: req.body.content},
+        {overwrite: true},
+        function(err, article) {
+            if (err) {
+                res.send(err);
+            } else if (article) {
+                res.send("successfully update article");
+            } else {
+                console.log("bruh");
+            }
+        }
+    )
 });
 
 app.post('/articles', function(req, res) {
